@@ -1,0 +1,21 @@
+[2021-07-25 17:24:53] local.ERROR: Command "passport:" is ambiguous.
+Did you mean one of these?
+    passport:install Run the commands necessary to prepare Passport for...
+    passport:client  Create a client for issuing access tokens
+    passport:hash    Hash all of the existing secrets in the clients table
+    passport:keys    Create the encryption keys for API authentication
+    passport:purge   Purge revoked and / or expired tokens and authenti.... {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"passport:\" is ambiguous.
+Did you mean one of these?
+    passport:install Run the commands necessary to prepare Passport for...
+    passport:client  Create a client for issuing access tokens
+    passport:hash    Hash all of the existing secrets in the clients table
+    passport:keys    Create the encryption keys for API authentication
+    passport:purge   Purge revoked and / or expired tokens and authenti.... at E:\\PROJECTS\\Laravel Project\\old_book_store\\vendor\\symfony\\console\\Application.php:723)
+[stacktrace]
+#0 E:\\PROJECTS\\Laravel Project\\old_book_store\\vendor\\symfony\\console\\Application.php(255): Symfony\\Component\\Console\\Application->find('passport:')
+#1 E:\\PROJECTS\\Laravel Project\\old_book_store\\vendor\\symfony\\console\\Application.php(167): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#2 E:\\PROJECTS\\Laravel Project\\old_book_store\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(92): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 E:\\PROJECTS\\Laravel Project\\old_book_store\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(129): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 E:\\PROJECTS\\Laravel Project\\old_book_store\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#5 {main}
+"} 
