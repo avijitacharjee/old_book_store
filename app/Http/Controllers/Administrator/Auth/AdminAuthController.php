@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use App\Notifications\verifyEmail;
 
 
 class AdminAuthController extends Controller
@@ -72,5 +71,19 @@ class AdminAuthController extends Controller
             'error' => false,
         ]);
 
+    }
+
+    /**
+     * User logout
+     * @return json
+     */
+    public function signOut(Request $request){
+        $token = $request->user()->token();
+        $token->revoke();
+        return response()->json([
+            
+            'message'=>'You have been successfully logged out!',
+            'error' => false,
+        ]);
     }
 }

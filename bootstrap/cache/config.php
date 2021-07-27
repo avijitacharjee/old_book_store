@@ -140,7 +140,7 @@
       array (
         'provider' => 'admins',
         'table' => 'password_resets',
-        'expire' => 15,
+        'expire' => 60,
         'throttle' => 60,
       ),
     ),
@@ -504,11 +504,11 @@
       'smtp' => 
       array (
         'transport' => 'smtp',
-        'host' => 'mailhog',
-        'port' => '1025',
+        'host' => 'smtp.mailtrap.io',
+        'port' => '2525',
         'encryption' => NULL,
-        'username' => NULL,
-        'password' => NULL,
+        'username' => 'ecfe09afa36ca8',
+        'password' => '2a1ab50082233b',
         'timeout' => NULL,
         'auth_mode' => NULL,
       ),
@@ -541,7 +541,7 @@
     ),
     'from' => 
     array (
-      'address' => NULL,
+      'address' => 'mesakt@live.com',
       'name' => 'Laravel',
     ),
     'markdown' => 
