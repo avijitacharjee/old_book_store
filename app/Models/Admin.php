@@ -7,10 +7,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+// use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 
-class User extends Authenticatable
+class Admin extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory;
+
 
     /**
      * The attributes that are mass assignable.
@@ -21,14 +23,9 @@ class User extends Authenticatable
         'name',
         'email',
         'phone',
-        'password',
-        'institute',
-        'division_id',
-        'district_id',
-        'upazila_id',
+        'role',
         'status',
-        'email_verified_at',
-        'email_verification_token',
+        'password',
         'image_path',
     ];
 
@@ -39,15 +36,6 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'remember_token',
-    ];
-
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'email_verified_at' => 'datetime',
+        // 'remember_token',
     ];
 }
