@@ -232,7 +232,7 @@ class LocationController extends Controller
         $posts = Book::where('division_id', $loc_id)
                     ->orWhere('district_id', $loc_id)
                     ->orWhere('division_id', $loc_id)
-                    ->paginate();
+                    ->paginate(20);
 
         return response()->json([
             'data' => ['posts' => $posts],
