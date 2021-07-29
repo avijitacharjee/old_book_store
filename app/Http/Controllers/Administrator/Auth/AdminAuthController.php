@@ -8,7 +8,11 @@ use App\Models\Admin;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
-
+/**
+     * Admin Login
+     * Admin Logout
+     * @return json
+*/
 class AdminAuthController extends Controller
 {
 

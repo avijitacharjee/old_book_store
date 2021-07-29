@@ -8,6 +8,13 @@ use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
+/**
+     * User profile
+     * update user profile
+     * delete user account
+     * @return json
+*/
+
 class ProfileController extends Controller
 {
     /**
@@ -52,11 +59,13 @@ class ProfileController extends Controller
             ]);
         }
 
-        $image = $request->file('image');
-        $image_path = null;
-        if($image){
+        $image_path = '';
+        if($request->hasfile('image')){
+            $image = $request->file('image');
             if($image->isValid()){
-                $image_path = $request->image->storeAs('users', $image->getClientOriginalName());
+                $name = time().rand(1,100).'.'.$image->extension();
+                $image->move(public_path('images/users'), $name);  
+                $image_path = 'images/users/'.$name;
             }
         }
 

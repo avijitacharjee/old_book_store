@@ -9,6 +9,13 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use App\Notifications\verifyEmail;
 
+/**
+     * create new account
+     * login
+     * logout
+     * email verification
+     * @return json
+*/
 class AuthController extends Controller
 {
 
@@ -49,11 +56,13 @@ class AuthController extends Controller
             ]);
         }
         
-        $image = $request->file('image');
         $image_path = '';
-        if($image){
+        if($request->hasfile('image')){
+            $image = $request->file('image');
             if($image->isValid()){
-                $image_path = $request->image->storeAs('users', $image->getClientOriginalName());
+                $name = time().rand(1,100).'.'.$image->extension();
+                $image->move(public_path('images/users'), $name);  
+                $image_path = 'images/users/'.$name;
             }
         }
 
@@ -73,7 +82,7 @@ class AuthController extends Controller
         ]);
 
         $accessToken = $user->createToken('authToken')->accessToken;
-        $user->notify(new verifyEmail($user));
+        // $user->notify(new verifyEmail($user));
         unset($user['email_verification_token']);
         return response()->json([
             'data' => [

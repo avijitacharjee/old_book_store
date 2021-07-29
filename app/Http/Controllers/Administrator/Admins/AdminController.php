@@ -9,6 +9,15 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use App\Notifications\verifyEmail;
 
+/**
+     * Get admins list
+     * create admin
+     * get information of a specific admin
+     * delete an admin 
+     * update an admin profile
+     * @return json
+*/
+
 class AdminController extends Controller
 {
     /**
@@ -56,11 +65,13 @@ class AdminController extends Controller
             ]);
         }
         
-        $image = $request->file('image');
         $image_path = '';
-        if($image){
+        if($request->hasfile('image')){
+            $image = $request->file('image');
             if($image->isValid()){
-                $image_path = $request->image->storeAs('admins', $image->getClientOriginalName());
+                $name = time().rand(1,100).'.'.$image->extension();
+                $image->move(public_path('images/admins'), $name);  
+                $image_path = 'images/admins/'.$name;
             }
         }
 
@@ -123,7 +134,7 @@ class AdminController extends Controller
     }
 
     /**
-     * updating an admins profile
+     * update an admin profile
      * @return json
      */
     public function update($id, Request $request){
