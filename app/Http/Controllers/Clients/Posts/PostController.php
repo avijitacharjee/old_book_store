@@ -86,6 +86,9 @@ class PostController extends Controller
             'price' => 'required|numeric',
             'short_description' => 'max:255',
             // 'description'
+            'division_id' => 'required|numeric|exists:locations,id',
+            'district_id' => 'required|numeric|exists:locations,id',
+            'upazila_id' => 'required|numeric|exists:locations,id',
             // 'is_sold' => 'required|numeric',
             // 'status' => 'required|numeric',
             
@@ -185,6 +188,9 @@ class PostController extends Controller
             'isbn_no' => 'max:17',
             'price' => 'required|numeric',
             'short_description' => 'max:255',
+            'division_id' => 'required|numeric|exists:locations,id',
+            'district_id' => 'required|numeric|exists:locations,id',
+            'upazila_id' => 'required|numeric|exists:locations,id',
             'is_sold' => 'numeric',
             
         ]);
@@ -214,6 +220,9 @@ class PostController extends Controller
             'price' => $request->price,
             'short_description' => $request->shrt_description,
             'description' => $request->description,
+            'division_id' => $request->division_id,
+            'district_id' => $request->district_id,
+            'upazila_id' => $request->upazila_id,
             'is_sold' => $request->is_sold,
         ]);
 

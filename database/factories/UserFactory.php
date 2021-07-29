@@ -5,7 +5,7 @@ namespace Database\Factories;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
-use App\Models\District;
+use App\Models\Location;
 class UserFactory extends Factory
 {
     /**
@@ -22,8 +22,8 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        $division_id = District::select('id')->inRandomOrder()->where('parent_id', null)->where('status', 1)->first();
-        // $district_id = District::select('id')->inRandomOrder()->where('parent_id', $division_id)->first();
+        $division_id = Location::select('id')->inRandomOrder()->where('parent_id', null)->where('status', 1)->first();
+        // $district_id = Location::select('id')->inRandomOrder()->where('parent_id', $division_id)->first();
         return [
             'name' => $this->faker->name(),
             'phone' => '0'.$this->faker->unique()->numberBetween(1300000000, 1900000000),
@@ -56,11 +56,11 @@ class UserFactory extends Factory
 
     
 }
-function divisionID(){
-    return District::select('id')->inRandomOrder()->where('parent_id', null)->first();
-}
-function districtID($division_id){
+// function divisionID(){
+//     return District::select('id')->inRandomOrder()->where('parent_id', null)->first();
+// }
+// function districtID($division_id){
 
-    $district_id = District::select('id')->inRandomOrder()->where('parent_id', $division_id)->first();
-    return $district_id;
-}
+//     $district_id = District::select('id')->inRandomOrder()->where('parent_id', $division_id)->first();
+//     return $district_id;
+// }

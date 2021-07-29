@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\District;
+use App\Models\Location;
 
-class DistrictTableSeeder extends Seeder
+class LocationTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,16 +15,16 @@ class DistrictTableSeeder extends Seeder
     public function run()
     {
         $divisions = [
-            ['name' => 'Dhaka', 'status' => 1],
-            ['name' => 'Chattogram', 'status' => 1],
-            ['name' => 'Sylhet', 'status' => 1],
-            ['name' => 'Rajshahi', 'status' => 1],
-            ['name' => 'Rangpur', 'status' => 1],
-            ['name' => 'Khulna', 'status' => 1],
-            ['name' => 'Barisal', 'status' => 1],
-            ['name' => 'Mymensingh', 'status' => 1],
-            ['name' => 'reserved1', 'status' => 0],
-            ['name' => 'reserved2', 'status' => 0],
+            ['name' => 'Dhaka Division', 'status' => 1],
+            ['name' => 'Chattogram Division', 'status' => 1],
+            ['name' => 'Sylhet Division', 'status' => 1],
+            ['name' => 'Rajshahi Division', 'status' => 1],
+            ['name' => 'Rangpur Division', 'status' => 1],
+            ['name' => 'Khulna Division', 'status' => 1],
+            ['name' => 'Barisal Division', 'status' => 1],
+            ['name' => 'Mymensingh Division', 'status' => 1],
+            ['name' => 'Reserved Division1', 'status' => 0],
+            ['name' => 'Reserved Division2', 'status' => 0],
                
         ];
 
@@ -106,7 +106,7 @@ class DistrictTableSeeder extends Seeder
 
         // Division seeder
         foreach ($divisions as $division) {
-            District::create(array(
+            Location::create(array(
                 'name' => $division['name'],
                 'status' => $division['status'],
             ));
@@ -114,10 +114,11 @@ class DistrictTableSeeder extends Seeder
 
         // District seeder
         foreach ($districts as $district) {
-            District::create(array(
+            Location::create(array(
                 'name' => $district['name'],
                 'parent_id' => $district['parent_id'],
             ));
         }
+
     }
 }

@@ -36,9 +36,9 @@ class AuthController extends Controller
             'phone' => 'required|digits:11|unique:users',
             'email' => 'email|required|unique:users',
             'institute' => 'required',
-            'division_id' => 'required|numeric|exists:districts,id',
-            'district_id' => 'required|numeric|exists:districts,id',
-            'upazila_id' => 'required|numeric|exists:districts,id',
+            'division_id' => 'required|numeric|exists:locations,id',
+            'district_id' => 'required|numeric|exists:locations,id',
+            'upazila_id' => 'required|numeric|exists:locations,id',
             'password' => 'required|min:8|max:16|confirmed',
             'image' => 'image|max:2048',
             

@@ -30,9 +30,9 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
 
-            $table->foreign('division_id')->references('id')->on('districts')->onDelete('cascade');
-            $table->foreign('district_id')->references('id')->on('districts')->onDelete('cascade');
-            $table->foreign('upazila_id')->references('id')->on('districts')->onDelete('cascade');
+            $table->foreign('division_id')->references('id')->on('locations')->onDelete('cascade');
+            $table->foreign('district_id')->references('id')->on('locations')->onDelete('cascade');
+            $table->foreign('upazila_id')->references('id')->on('locations')->onDelete('cascade');
         });
     }
 

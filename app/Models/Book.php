@@ -28,6 +28,9 @@ class Book extends Model
         'price',
         'short_description',
         'description',
+        'division_id',
+        'district_id',
+        'upazila_id',
         'is_sold',
         'status',
     ];

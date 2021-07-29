@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Administrator\Posts;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Book;
+use App\Models\Location;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -64,6 +65,13 @@ class AdminBookController extends Controller
             ]);
         }
 
+        // data validation
+        if(!$request->sub_category1_id){
+            unset($request['sub_category1_id']);
+        }
+        if(!$request->sub_category2_id){
+            unset($request['sub_category2_id']);
+        }
         $validator = Validator::make($request->all(), [
             'title' => 'required',
             'author' => 'required',
@@ -77,6 +85,9 @@ class AdminBookController extends Controller
             'price' => 'required|numeric',
             'short_description' => 'max:255',
             // 'description'
+            'division_id' => 'required|numeric|exists:locations,id',
+            'district_id' => 'required|numeric|exists:locations,id',
+            'upazila_id' => 'required|numeric|exists:locations,id',
             'is_sold' => 'required|numeric',
             'status' => 'required|numeric',
             
@@ -108,6 +119,9 @@ class AdminBookController extends Controller
             'short_description' => $request->shrt_description,
             'description' => $request->description,
             'is_sold' => $request->is_sold,
+            'division_id' => $request->division_id,
+            'district_id' => $request->district_id,
+            'upazila_id' => $request->upazila_id,
             'status' => $request->status,
         ]);
         return response()->json([

@@ -1,49 +1,71 @@
 <?php
 
-namespace App\Http\Controllers\Clients\Profile;
+namespace App\Http\Controllers\Administrator\Users;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
+use App\Models\User;
+use App\Models\Book;
 
 /**
-     * User profile
-     * update user profile
-     * delete user account
+     * get users (clients) list
+     * get a specific user
+     * update a specific user by admin
+     * delete an user
+     * get all books of an user
      * @return json
 */
 
-class ProfileController extends Controller
+class AdminUserController extends Controller
 {
     /**
-     * User profile
+     * get users (clients) list
      * @return json
      */
-    public function show(){
-        $user = auth()->user();
-        return $user;
+    public function userList(){
+        $users = User::orderBy('id', 'DESC')->paginate(20);
+        return response()->json([
+            'data' => $users,
+            'message'=>'Users list',
+            'error' => false,
+            
+        ]);
     }
 
     /**
-     * Update user profile
+     * get a specific user
      * @return json
      */
-    public function update(Request $request){
-        // get user id from auth
-        $user = auth()->user();
+    public function showUser($user_id){
+        return response()->json([
+            'data' => [
+                'user' => User::find($user_id),
+            ],
+            'message'=>'User',
+            'error' => false,
+            
+        ]);
+    }
 
-        // data validation
+    /**
+     * update a specific user by admin
+     * @return json
+     */
+    public function updateUser($user_id, Request $request){
+        
         $validator = Validator::make($request->all(), [
             'name' => 'required',
+            'email' => 'required|email',
             'phone' => 'required|digits:11',
             'institute' => 'required',
             'division_id' => 'required|numeric|exists:locations,id',
             'district_id' => 'required|numeric|exists:locations,id',
             'upazila_id' => 'required|numeric|exists:locations,id',
+            'status' => 'required|numeric',
             'password' => 'required|min:8|max:16|confirmed',
-            'image' => 'image|max:2048',
+            'image' => 'image',
             
         ]);
 
@@ -70,8 +92,7 @@ class ProfileController extends Controller
         }
 
         // update profile
-        $user = User::find($user->id);
-        // return $user->id;
+        $user = User::find($user_id);
         $user->update([
             'name' => $request->name,
             'phone' => $request->phone,
@@ -97,20 +118,36 @@ class ProfileController extends Controller
     }
 
     /**
-     * delete user account
+     * delete an user by admin
      * @return json
      */
-    public function destroy(){
-        $user = auth()->user();
-        $user = User::find($user->id);
+    public function destroyUser($user_id){
+        $user = User::find($user_id);
+        if(!$user){
+            return response()->json([
+                'message'=>'Data not found',
+                'error' => true,
+            ]);
+        }
+
         if($user->delete()){
             return response()->json([
-                'data' => [
-                    'user' => $user,
-                ],
-                'message'=>'Account deleted',
+                'message'=>'Successfully deleted',
                 'error' => false,
             ]);
         }
+    }
+
+    /**
+     * get all books of an user
+     * @return json
+     */
+    public function books($user_id){
+        $books = Book::with('images')->where('seller_id', $user_id)->paginate(20);
+        return response()->json([
+            'data' => $books,
+            'message'=>'Successfully deleted',
+            'error' => false,
+        ]);
     }
 }
