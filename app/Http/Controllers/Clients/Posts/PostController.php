@@ -120,6 +120,9 @@ class PostController extends Controller
             'price' => $request->price,
             'short_description' => $request->shrt_description,
             'description' => $request->description,
+            'division_id' => $request->division_id,
+            'district_id' => $request->district_id,
+            'upazila_id' => $request->upazila_id,
             'is_sold' => 0,
             'status' => 1,
         ]);

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Location;
+use Illuminate\Support\Str;
 
 class LocationTableSeederForUpazila extends Seeder
 {
@@ -43,6 +44,7 @@ class LocationTableSeederForUpazila extends Seeder
         foreach ($upazilas as $upazila) {
             Location::create(array(
                 'name' => $upazila['name'],
+                'slug' => Str::slug($upazila['name'], '-'),
                 'parent_id' => $upazila['parent_id'],
             ));
         }

@@ -9,7 +9,6 @@ use Illuminate\Support\Str;
 use App\Models\Location;
 use App\Models\User;
 use App\Models\Book;
-use DB;
 
 /**
      * get a location with her child location
@@ -23,7 +22,7 @@ use DB;
      * @return json
 */
 
-class LocationController extends Controller
+class AdminLocationController extends Controller
 {
     /**
      * get a location with her child location

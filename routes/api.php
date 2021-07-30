@@ -15,7 +15,7 @@ use App\Http\Controllers\Administrator\Admins\AdminController;
 use App\Http\Controllers\Administrator\Posts\AdminBookController;
 use App\Http\Controllers\Administrator\Category\AdminCategoryController;
 use App\Http\Controllers\Administrator\Users\AdminUserController;
-use App\Http\Controllers\Administrator\Locations\LocationController;
+use App\Http\Controllers\Administrator\Locations\AdminLocationController;
 
 
 Route::get('/login-page', function(){
@@ -86,14 +86,14 @@ Route::group(['middleware'=>'auth:api-admin', 'prefix'=>'administrator'], functi
     });
 
     Route::group(['prefix' => 'location'], function(){ // Location API
-        Route::get('/', [LocationController::class, 'getAllDivision']);
-        Route::get('/districts', [LocationController::class, 'getAllDistrict']);
-        Route::get('/{location_id}', [LocationController::class, 'getLocation']);
-        Route::get('/{location_id}/childs', [LocationController::class, 'getChild']);
-        Route::post('/create', [LocationController::class, 'createLocation']);
-        Route::post('/{location_id}/update', [LocationController::class, 'updateLocation']);
-        Route::get('/{location_id}/delete', [LocationController::class, 'destroyLocation']);
-        Route::get('/{location_id}/users', [LocationController::class, 'getUsers']); //all users of a specific location
-        Route::get('/{location_id}/posts', [LocationController::class, 'getPosts']); //all post/book of a specific location
+        Route::get('/', [AdminLocationController::class, 'getAllDivision']);
+        Route::get('/districts', [AdminLocationController::class, 'getAllDistrict']);
+        Route::get('/{loc_id}', [AdminLocationController::class, 'getLocation']);
+        Route::get('/{loc_id}/childs', [AdminLocationController::class, 'getChild']);
+        Route::post('/create', [AdminLocationController::class, 'createLocation']);
+        Route::post('/{loc_id}/update', [AdminLocationController::class, 'updateLocation']);
+        Route::get('/{loc_id}/delete', [AdminLocationController::class, 'destroyLocation']);
+        Route::get('/{loc_id}/users', [AdminLocationController::class, 'getUsers']); //all users of a specific location
+        Route::get('/{loc_id}/posts', [AdminLocationController::class, 'getPosts']); //all post/book of a specific location
     });
 });

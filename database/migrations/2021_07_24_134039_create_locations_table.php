@@ -17,6 +17,7 @@ class CreateLocationsTable extends Migration
             $table->id();
             $table->string('name',32);
             $table->unsignedBigInteger('parent_id')->nullable();
+            $table->string('slug')->unique()->nullable();
             $table->tinyInteger('status')->default(1);
             $table->timestamps();
             $table->foreign('parent_id')->references('id')->on('locations')->onDelete('cascade');

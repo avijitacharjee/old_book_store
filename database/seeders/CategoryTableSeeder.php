@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Category;
+use Illuminate\Support\Str;
 
 class CategoryTableSeeder extends Seeder
 {
@@ -40,6 +41,7 @@ class CategoryTableSeeder extends Seeder
         foreach ($categories as $category) {
             Category::create(array(
                 'title' => $category['title'],
+                'slug' => Str::slug($category['title'], '-'),
             ));
         }
     }

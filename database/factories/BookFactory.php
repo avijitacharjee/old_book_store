@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 use App\Models\Book;
 use App\Models\Category;
 use App\Models\Location;
@@ -23,12 +24,14 @@ class BookFactory extends Factory
      */
     public function definition()
     {
-        // $category_id = Category::select('id')->inRandomOrder()->first();
+        $title = $this->faker->name;
+        // $slug = Str::slug($title.rand(1,5), '-');
         $category_id = Category::get()->random()->id;
         $division_id = Location::where('parent_id', null)->where('status', 1)->get()->random()->id;
         return [
             'seller_id' => $this->faker->numberBetween(5, 25),
-            'title' => $this->faker->name,
+            'title' => $title,
+            // 'slug' => $slug,
             'author' => $this->faker->name,
             'edition' => $this->faker->randomElements(['3rd', '4th', '5th', '6th'])[0],
             'publication' => $this->faker->name,
@@ -36,7 +39,7 @@ class BookFactory extends Factory
             'category_id' => $category_id,
             'isbn_no' => null,
             'price' => $this->faker->numberBetween(100, 500),
-            'short_description' => null,
+            'short_description' => $this->faker->sentence,
             'description' => $this->faker->text,
             'is_sold' => $this->faker->randomElements([0, 0, 0, 1])[0],
             'division_id' => $division_id,

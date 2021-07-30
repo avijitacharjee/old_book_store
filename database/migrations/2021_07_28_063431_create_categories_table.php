@@ -19,6 +19,7 @@ class CreateCategoriesTable extends Migration
             $table->unsignedBigInteger('parent_id')->nullable();
             $table->tinyInteger('is_featured')->default(0);
             $table->tinyInteger('status')->default(1);
+            $table->string('slug')->unique()->nullable();
             $table->string('image_path', 128)->nullable();
             $table->timestamps();
             $table->foreign('parent_id')->references('id')->on('categories')->onDelete('cascade');
