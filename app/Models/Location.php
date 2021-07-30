@@ -18,6 +18,7 @@ class Location extends Model
     protected $fillable = [
         'name',
         'parent_id',
+        'slug',
         'status',
     ];
 
@@ -65,5 +66,10 @@ class Location extends Model
     public function childs(){
         return $this->hasMany('App\Models\Location','parent_id');
                     // ->select(['id', 'parent_id']);
+    }
+
+    public function child(){
+        return $this->hasMany('App\Models\Location','parent_id')
+                     ->select(['id', 'name', 'slug', 'parent_id']); //for client side
     }
 }

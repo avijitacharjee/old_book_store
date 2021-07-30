@@ -122,4 +122,31 @@ class Book extends Model
         return $this->belongsTo('App\Models\Location', 'upazila_id')->select(['id','name','slug',]);
     }
 
+    /** 
+     * get category
+     *
+     * @return response()
+     */
+    public function category(){
+        return $this->belongsTo('App\Models\Category', 'category_id')->select(['id','title','slug',]);
+    }
+
+    /** 
+     * get sub category_1
+     *
+     * @return response()
+     */
+    public function sub_category(){
+        return $this->belongsTo('App\Models\Category', 'sub_category1_id')->select(['id','title','slug',]);
+    }
+
+    /** 
+     * get sub category_2
+     *
+     * @return response()
+     */
+    public function sub_category2(){
+        return $this->belongsTo('App\Models\Category', 'sub_category2_id')->select(['id','title','slug',]);
+    }
+
 }

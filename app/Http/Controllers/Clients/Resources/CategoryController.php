@@ -65,7 +65,8 @@ class CategoryController extends Controller
             ]);
         }
         $cat_id = $cat->id;
-        $ads = Book::select('seller_id',
+        $ads = Book::select('id',
+                        'seller_id',
                         'title',
                         'slug',
                         'author',
@@ -90,7 +91,8 @@ class CategoryController extends Controller
                             $query->where('category_id', $cat_id)
                             ->orWhere('sub_category1_id', $cat_id)
                             ->orWhere('sub_category2_id', $cat_id);
-                       })
+                        })
+                        ->orderBy('id', 'DESC')
                         ->paginate(20);
         return response()->json([
             'ads' => $ads,
