@@ -19,6 +19,7 @@ class Category extends Model
         'title',
         'parent_id',
         'is_featured',
+        'slug',
         'status',
         'image_path',
     ];

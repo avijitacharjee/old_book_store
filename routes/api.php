@@ -8,6 +8,7 @@ use App\Http\Controllers\Clients\Auth\AuthController;
 use App\Http\Controllers\Clients\Profile\ProfileController;
 use App\Http\Controllers\Clients\Posts\PostController;
 use App\Http\Controllers\Clients\Posts\PostImageController;
+use App\Http\Controllers\Clients\Resources\CategoryController;
 
 // Administrator
 use App\Http\Controllers\Administrator\Auth\AdminAuthController;
@@ -43,6 +44,11 @@ Route::group(['middleware'=>'auth:api'], function(){
         Route::post('/{post_id}/update/add-image', [PostImageController::class, 'addImage']);
         Route::get('/{post_id}/image/{img_id}/delete', [PostImageController::class, 'deleteImage']);
     });
+});
+Route::group(['prefix' => 'category'], function(){ 
+    Route::get('/', [CategoryController::class, 'index']); // all category list
+    Route::get('/feature-category', [CategoryController::class, 'featureCategory']); // featured category
+    Route::get('/{cat_slug}', [CategoryController::class, 'getAdsByCat']); // all ads of an specific cat.
 });
 
 

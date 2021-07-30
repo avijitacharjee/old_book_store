@@ -29,6 +29,7 @@ class Book extends Model
         'price',
         'short_description',
         'description',
+        'slug',
         'division_id',
         'district_id',
         'upazila_id',
@@ -79,9 +80,46 @@ class Book extends Model
         return $slug;
     }
 
-
-
+    /** 
+     * get upazila
+     *
+     * @return response()
+     */
+    public function seller(){
+        return $this->belongsTo('App\Models\User', 'seller_id')->select(['id','name',]);
+    }
+    /** 
+     * get post image
+     *
+     * @return response()
+     */
     public function images(){
         return $this->hasMany('App\Models\BookImage')->select(['path','id','book_id','seller_id']);
     }
+
+    /** 
+     * get division
+     *
+     * @return response()
+     */
+    public function division(){
+        return $this->belongsTo('App\Models\Location', 'division_id')->select(['id','name','slug',]);
+    }
+    /** 
+     * get district
+     *
+     * @return response()
+     */
+    public function district(){
+        return $this->belongsTo('App\Models\Location', 'district_id')->select(['id','name','slug',]);
+    }
+    /** 
+     * get upazila
+     *
+     * @return response()
+     */
+    public function upazila(){
+        return $this->belongsTo('App\Models\Location', 'upazila_id')->select(['id','name','slug',]);
+    }
+
 }
