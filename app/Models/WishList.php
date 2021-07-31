@@ -8,4 +8,36 @@ use Illuminate\Database\Eloquent\Model;
 class WishList extends Model
 {
     use HasFactory;
+
+    /**
+     * The attributes  that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'book_id',
+        'user_id',
+    ];
+
+    /** 
+     * get ad info
+     *
+     * @return response()
+     */
+    public function adTitle(){
+        return $this->belongsTo('App\Models\Book', 'book_id')
+                        ->select(['id','title','slug']);
+                        // ->with('images');
+    }
+
+    /** 
+     * get ad images
+     *
+     * @return response()
+     */
+    public function adImages(){
+        return $this->belongsTo('App\Models\BookImage', 'book_id')
+                        ->select(['id','path']);
+                        // ->with('images');
+    }
 }
