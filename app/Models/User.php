@@ -50,4 +50,32 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    /** 
+     * get division name
+     *
+     * @return response()
+     */
+    public function division(){
+        return $this->belongsTo('App\Models\Location', 'division_id')->select(['id','name','slug',]);
+    }
+
+    /** 
+     * get district
+     *
+     * @return response()
+     */
+    public function district(){
+        return $this->belongsTo('App\Models\Location', 'district_id')->select(['id','name','slug',]);
+    }
+
+    /** 
+     * get upazila/city area
+     *
+     * @return response()
+     */
+    public function upazila(){
+        return $this->belongsTo('App\Models\Location', 'upazila_id')->select(['id','name','slug',]);
+    }
 }

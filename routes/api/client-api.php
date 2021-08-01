@@ -8,6 +8,7 @@ use App\Http\Controllers\Clients\Resources\CategoryController;
 use App\Http\Controllers\Clients\Resources\AdsController;
 use App\Http\Controllers\Clients\Resources\LocationController;
 use App\Http\Controllers\Clients\Resources\WishListController;
+use App\Http\Controllers\Clients\Resources\UserController;
 
 
 Route::post('/registration', [AuthController::class, 'register']);
@@ -63,6 +64,9 @@ Route::group(['prefix' => 'rcs'], function(){
     Route::get('/category/{cat_slug}', [CategoryController::class, 'getAdsByCat']); // get all ads of a specific category (per page 20)
     Route::get('/location/{loc_slug}/ads', [LocationController::class, 'getAdsByLocation']); // get ads of a specific location (per page 20)
     Route::get('/ads/{loc_slug}/{cat_slug}', [AdsController::class, 'getAdsByLocAndCat']); // get ads of a specific location & category (pp20)
+
+    
+    Route::get('/user/{user_id}', [UserController::class, 'getUser']); // get an  user profile
 
 });
 
