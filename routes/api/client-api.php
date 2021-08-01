@@ -67,6 +67,7 @@ Route::group(['prefix' => 'rcs'], function(){
 
     
     Route::get('/user/{user_id}', [UserController::class, 'getUser']); // get an  user profile
+    Route::get('/user/{user_id}/ads', [UserController::class, 'getAds']); // get all Ads of a specific user
 
 });
 

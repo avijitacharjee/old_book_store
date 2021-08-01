@@ -89,12 +89,21 @@ class Book extends Model
         return $this->belongsTo('App\Models\User', 'seller_id')->select(['id','name',]);
     }
     /** 
-     * get post image
+     * get post images
      *
      * @return response()
      */
     public function images(){
         return $this->hasMany('App\Models\BookImage')->select(['path','id','book_id','seller_id']);
+    }
+
+    /** 
+     * get post image
+     *
+     * @return response()
+     */
+    public function image(){
+        return $this->belongsTo('App\Models\BookImage','id')->select(['path','id','book_id',]);
     }
 
     /** 
