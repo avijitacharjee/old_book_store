@@ -40,4 +40,13 @@ class WishList extends Model
                         ->select(['id','path']);
                         // ->with('images');
     }
+
+    /** 
+     * get user
+     *
+     * @return response()
+     */
+    public function user(){
+        return $this->belongsTo('App\Models\User', 'user_id')->select(['id','name','image_path']);
+    }
 }

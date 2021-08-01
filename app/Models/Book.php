@@ -81,7 +81,7 @@ class Book extends Model
     }
 
     /** 
-     * get upazila
+     * get seller
      *
      * @return response()
      */

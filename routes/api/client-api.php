@@ -65,7 +65,7 @@ Route::group(['prefix' => 'rcs'], function(){
     Route::get('/location/{loc_slug}/ads', [LocationController::class, 'getAdsByLocation']); // get ads of a specific location (per page 20)
     Route::get('/ads/{loc_slug}/{cat_slug}', [AdsController::class, 'getAdsByLocAndCat']); // get ads of a specific location & category (pp20)
 
-    
+    // User profile with ads
     Route::get('/user/{user_id}', [UserController::class, 'getUser']); // get an  user profile
     Route::get('/user/{user_id}/ads', [UserController::class, 'getAds']); // get all Ads of a specific user
 
