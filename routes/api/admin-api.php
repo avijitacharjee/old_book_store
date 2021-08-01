@@ -22,7 +22,7 @@ Route::group(['middleware'=>'auth:api-admin', 'prefix'=>'administrator'], functi
         Route::get('/{admin_id}/delete', [AdminController::class, 'destroy']);
     });
 
-    Route::group(['prefix' => 'book'], function(){ // book/post API
+    Route::group(['prefix' => 'book'], function(){ // ads(book/post) API
         Route::get('/', [AdminBookController::class, 'index']);
         Route::get('/{book_id}', [AdminBookController::class, 'show']);
         Route::post('/{book_id}/update', [AdminBookController::class, 'update']);

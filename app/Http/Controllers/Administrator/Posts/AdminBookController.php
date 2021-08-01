@@ -36,7 +36,15 @@ class AdminBookController extends Controller
      * @return json
      */
     public function show($book_id){
-        $book = Book::with('images')->find($book_id);
+        $book = Book::with('seller')
+                    ->with('category')
+                    ->with('sub_category')
+                    ->with('sub_category2')
+                    ->with('division')
+                    ->with('district')
+                    ->with('upazila')
+                    ->with('images')
+                    ->find($book_id);
         return response()->json([
             'data' => [
                 'book' => $book,
