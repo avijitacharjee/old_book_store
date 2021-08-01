@@ -41,7 +41,10 @@ class AdminUserController extends Controller
     public function showUser($user_id){
         return response()->json([
             'data' => [
-                'user' => User::find($user_id),
+                'user' => User::with('division')
+                            ->with('district')
+                            ->with('upazila')
+                            ->find($user_id),
             ],
             'message'=>'User',
             'error' => false,
