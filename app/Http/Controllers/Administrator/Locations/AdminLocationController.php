@@ -15,10 +15,12 @@ use App\Models\Book;
      * get all division with there districts
      * get all district 
      * get all child of specific division/district
+     * get total number of child of a location
      * create location (district/division/upazila/thana/cit corporation area)
      * update location
      * delete location
      * get all user of a specific location
+     * get total number of user of a location
      * @return json
 */
 
@@ -81,6 +83,22 @@ class AdminLocationController extends Controller
             ],
             'message'=>'Childs list',
             'error' => false,
+        ]);
+    }
+
+    /**
+     * get total number of child of a location
+     * @return json
+     */
+    public function childCount($id){
+        $count = Location::where('parent_id', $id)->count();
+        return response()->json([
+            'data' => [
+                'count' => $count,
+            ],
+            'message'=>'total number of child of a location',
+            'error' => false,
+            
         ]);
     }
 
@@ -221,6 +239,25 @@ class AdminLocationController extends Controller
         ]);
     }
 
+    /**
+     * get total number of user of a location
+     * @return json
+     */
+    public function userCount($loc_id){
+        $count = User::where('division_id', $loc_id)
+                        ->orWhere('district_id', $loc_id)
+                        ->orWhere('upazila_id', $loc_id)
+                        ->count();
+        return response()->json([
+            'data' => [
+                'count' => $count,
+            ],
+            'message'=>'total number of user of a location',
+            'error' => false,
+            
+        ]);
+    }
+
 
     /**
      * all post/book of a specific location
@@ -237,6 +274,25 @@ class AdminLocationController extends Controller
             'data' => ['posts' => $posts],
             'message' => 'All user of a specific location',
             'error' => false, 
+        ]);
+    }
+
+    /**
+     * get total number of ads(book/post) of a location
+     * @return json
+     */
+    public function postsCount($loc_id){
+        $count = Book::where('division_id', $loc_id)
+                        ->orWhere('district_id', $loc_id)
+                        ->orWhere('division_id', $loc_id)
+                        ->count();
+        return response()->json([
+            'data' => [
+                'count' => $count,
+            ],
+            'message'=>'otal number of ads(book/post) of a location',
+            'error' => false,
+            
         ]);
     }
 }

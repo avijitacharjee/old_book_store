@@ -25,6 +25,11 @@ Route::group(['middleware'=>'auth:api-admin', 'prefix'=>'administrator'], functi
 
     Route::group(['prefix' => 'book'], function(){ // ads(book/post) API
         Route::get('/', [AdminBookController::class, 'index']);
+        Route::get('/count', [AdminBookController::class, 'count']);
+        Route::get('/unsold-book', [AdminBookController::class, 'unsoldItem']);
+        Route::get('/unsold-book/count', [AdminBookController::class, 'unsoldCount']);
+        Route::get('/sold-book', [AdminBookController::class, 'soldItem']);
+        Route::get('/sold-book/count', [AdminBookController::class, 'soldCount']);
         Route::get('/{book_id}', [AdminBookController::class, 'show']);
         Route::post('/{book_id}/update', [AdminBookController::class, 'update']);
         Route::get('/{book_id}/delete', [AdminBookController::class, 'destroy']);
@@ -33,14 +38,17 @@ Route::group(['middleware'=>'auth:api-admin', 'prefix'=>'administrator'], functi
     Route::group(['prefix' => 'category'], function(){ // category API
         Route::get('/', [AdminCategoryController::class, 'index']);
         Route::post('/create', [AdminCategoryController::class, 'create']);
+        Route::get('/count', [AdminCategoryController::class, 'count']);
         Route::get('/{cat_id}', [AdminCategoryController::class, 'show']);
         Route::post('/{cat_id}/update', [AdminCategoryController::class, 'update']);
         Route::get('/{cat_id}/delete', [AdminCategoryController::class, 'destroy']);
         Route::get('/{cat_id}/posts', [AdminCategoryController::class, 'books']); //all posts/books of a specific cat
+        Route::get('/{cat_id}/count', [AdminCategoryController::class, 'count']); //total numbr of posts of a category
     });
 
     Route::group(['prefix' => 'user'], function(){ // user(client) API
         Route::get('/', [AdminUserController::class, 'userList']);
+        Route::get('/count', [AdminUserController::class, 'count']);
         Route::get('/{user_id}', [AdminUserController::class, 'showUser']);
         Route::post('/{user_id}/update', [AdminUserController::class, 'updateUser']);
         Route::get('/{user_id}/delete', [AdminUserController::class, 'destroyUser']);
@@ -52,15 +60,19 @@ Route::group(['middleware'=>'auth:api-admin', 'prefix'=>'administrator'], functi
         Route::get('/districts', [AdminLocationController::class, 'getAllDistrict']);
         Route::get('/{loc_id}', [AdminLocationController::class, 'getLocation']);
         Route::get('/{loc_id}/childs', [AdminLocationController::class, 'getChild']);
+        Route::get('/{loc_id}/childs/count', [AdminLocationController::class, 'childCount']);
         Route::post('/create', [AdminLocationController::class, 'createLocation']);
         Route::post('/{loc_id}/update', [AdminLocationController::class, 'updateLocation']);
         Route::get('/{loc_id}/delete', [AdminLocationController::class, 'destroyLocation']);
         Route::get('/{loc_id}/users', [AdminLocationController::class, 'getUsers']); //all users of a specific location
+        Route::get('/{loc_id}/users/count', [AdminLocationController::class, 'userCount']);
         Route::get('/{loc_id}/posts', [AdminLocationController::class, 'getPosts']); //all post/book of a specific location
+        Route::get('/{loc_id}/posts/count', [AdminLocationController::class, 'postsCount']);
     });
 
     Route::group(['prefix' => 'wish-list'], function(){ // Wish List API
         Route::get('/', [AdminWishListController::class, 'getUsers']); //all users who have the wish
+        Route::get('/count', [AdminWishListController::class, 'count']); //number of users who have the wish
         Route::get('/{user_id}', [AdminWishListController::class, 'getWishList']); //all wishes of a user
         Route::get('/{user_id}/destroy', [AdminWishListController::class, 'destroy']); //remove all wishes of a user
     });

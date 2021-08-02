@@ -61,7 +61,7 @@ Route::group(['prefix' => 'rcs'], function(){
     Route::get('/ads', [AdsController::class, 'getNewAds']); // get all Ads(post/book) in desc(new) order (per page 20)
     Route::get('/ads/old', [AdsController::class, 'getOldAds']); // get all Ads(post/book) in aesc(old) order (per page 20)
     Route::get('/ads/{ad_slug}', [AdsController::class, 'getAd']); // get a Ad
-    Route::get('/category/{cat_slug}', [CategoryController::class, 'getAdsByCat']); // get all ads of a specific category (per page 20)
+    Route::get('/categories/{cat_slug}', [CategoryController::class, 'getAdsByCat']); // get all ads of a specific category (per page 20)
     Route::get('/location/{loc_slug}/ads', [LocationController::class, 'getAdsByLocation']); // get ads of a specific location (per page 20)
     Route::get('/ads/{loc_slug}/{cat_slug}', [AdsController::class, 'getAdsByLocAndCat']); // get ads of a specific location & category (pp20)
 

@@ -35,6 +35,22 @@ class AdminUserController extends Controller
     }
 
     /**
+     * total number of user
+     * @return json
+     */
+    public function count(){
+        $count = User::count();
+        return response()->json([
+            'data' => [
+                'count' => $count,
+            ],
+            'message'=>'total number of user',
+            'error' => false,
+            
+        ]);
+    }
+
+    /**
      * get a specific user
      * @return json
      */

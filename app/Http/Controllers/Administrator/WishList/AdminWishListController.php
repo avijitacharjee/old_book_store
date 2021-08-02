@@ -6,8 +6,21 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\WishList;
 
+
+/**
+     * /all users who have the wish
+     * number of users who have the wish
+     * all wishes of a user
+     * remove all wishes of a user
+     * @return json
+*/
+
 class AdminWishListController extends Controller
 {
+    /**
+     * all users who have the wish
+     * @return json
+     */
     public function getUsers(){
         $users = WishList::select('user_id')->with('user')->distinct()->get();
         return response()->json([
@@ -17,6 +30,26 @@ class AdminWishListController extends Controller
         ]);
     }
 
+    /**
+     * number of users who have the wish
+     * @return json
+     */
+    public function count(){
+        $count = WishList::select('user_id')->distinct()->count();
+        return response()->json([
+            'data' => [
+                'count' => $count,
+            ],
+            'message'=>'number of users who have the wish',
+            'error' => false,
+            
+        ]);
+    }
+
+    /**
+     * /all wishes of a user
+     * @return json
+     */
     public function getWishList($user_id){
         $users = WishList::with('adTitle')
                         ->with('adImages')
@@ -36,6 +69,10 @@ class AdminWishListController extends Controller
         ]);
     }
 
+    /**
+     * /remove all wishes of a user
+     * @return json
+     */
     public function destroy($user_id){
         if(WishList::where('user_id', $user_id)->delete()){
             return response()->json([

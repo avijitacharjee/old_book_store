@@ -11,7 +11,10 @@ use Illuminate\Support\Str;
 
 /**
      * gell all post (book) list
+     * get all unsold book
+     * get all sold book
      * get a specific post(book)
+     * get total number of post(ads/book)
      * update a specific post(book)
      * delete a specific post (delete)
      * @return json
@@ -28,6 +31,64 @@ class AdminBookController extends Controller
             'data' => $books,
             'message' => 'list of book',
             'error' => false,     
+        ]);
+    }
+
+    /**
+     * get unsold books(posts/ads)
+     * @return json
+     */
+    public function unsoldItem(){
+        $books = Book::where('is_sold', 0)->with('images')->paginate(20);
+        return response()->json([
+            'data' => $books,
+            'message' => 'unsold items',
+            'error' => false,     
+        ]);
+    }
+
+    /**
+     * get sold books(posts/ads)
+     * @return json
+     */
+    public function soldItem(){
+        $books = Book::where('is_sold', 1)->with('images')->paginate(20);
+        return response()->json([
+            'data' => $books,
+            'message' => 'sold items',
+            'error' => false,     
+        ]);
+    }
+
+    /**
+     * number of unsold book
+     * @return json
+     */
+    public function unsoldCount(){
+        $count = Book::where('is_sold', 0)->count();
+        return response()->json([
+            'data' => [
+                'count' => $count,
+            ],
+            'message'=>'nnumber of unsold book',
+            'error' => false,
+            
+        ]);
+    }
+
+    /**
+     * number of sold book
+     * @return json
+     */
+    public function soldCount(){
+        $count = Book::where('is_sold', 1)->count();
+        return response()->json([
+            'data' => [
+                'count' => $count,
+            ],
+            'message'=>'nnumber of sold book',
+            'error' => false,
+            
         ]);
     }
 
@@ -50,6 +111,22 @@ class AdminBookController extends Controller
                 'book' => $book,
             ],
             'message'=>'info of an book',
+            'error' => false,
+            
+        ]);
+    }
+
+    /**
+     * total number of posts(book/ads)
+     * @return json
+     */
+    public function count(){
+        $count = Book::count();
+        return response()->json([
+            'data' => [
+                'count' => $count,
+            ],
+            'message'=>'total number of ads(book/post)',
             'error' => false,
             
         ]);

@@ -12,6 +12,8 @@ use App\Models\Book;
 /**
      * get categories list
      * get a specific category
+     * get total number of category
+     * total number of post (book/ads) of a category
      * get all books of an specific category
      * delete category
      * create category
@@ -50,6 +52,39 @@ class AdminCategoryController extends Controller
             'error' => false,
         ]);
     }
+
+    /**
+     * total number of category
+     * total number of posts (book/ads) of a category
+     * @return json
+     */
+    public function count($cat_id = null){
+        
+        if(!$cat_id){ // total number of category
+            return response()->json([
+                'data' => [
+                    'count' => Category::count(),
+                ],
+                'message'=>'total number of category',
+                'error' => false,
+                
+            ]);
+        } else{ //total number of post (book/ads) of a category
+            $count = Book::where('category_id', $cat_id)
+                        ->orWhere('sub_category1_id', $cat_id)
+                        ->orWhere('sub_category2_id', $cat_id)
+                        ->count();
+            return response()->json([
+                'data' => [
+                    'count' => $count,
+                ],
+                'message'=>'number of post of a category',
+                'error' => false,
+                
+            ]);
+        }
+    }
+
 
     /**
      * get all books of an specific category
