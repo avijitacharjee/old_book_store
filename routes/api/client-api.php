@@ -10,11 +10,19 @@ use App\Http\Controllers\Clients\Resources\LocationController;
 use App\Http\Controllers\Clients\Resources\WishListController;
 use App\Http\Controllers\Clients\Resources\UserController;
 use App\Http\Controllers\Clients\Search\SearchController;
+use App\Http\Controllers\Clients\Auth\GoogleController;
+use App\Http\Controllers\Clients\Auth\FacebookController;
 
 
 Route::post('/registration', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/verify/{token}', [AuthController::class, 'emailVerification']);
+
+Route::get('/login/facebook', [FacebookController::class, 'redirectToFacebook']);
+Route::get('/login/facebook/callback', [FacebookController::class, 'handleFacebookCallback']);
+
+Route::get('/login/google', [GoogleController::class, 'redirectToGoogle']); //link: http://127.0.0.1:8000/api/login/google
+Route::get('/login/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
 Route::group(['middleware'=>'auth:api'], function(){
     Route::get('/logout', [AuthController::class, 'signOut']);

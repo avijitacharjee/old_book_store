@@ -30,6 +30,8 @@ class UserFactory extends Factory
             'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'institute' => 'Premier University',
+            'gender' => $this->faker->randomElements(['Male', 'Female', 'Male',])[0],
+            'date_of_birth' => $this->faker->dateTimeBetween('1960-01-01', '2006-12-31')->format('Y/m/d'),
             'division_id' => $division_id,
             'district_id' => 2, // it will be updated automatically at later by seeder file.
             // 'upazila_id' => null,
