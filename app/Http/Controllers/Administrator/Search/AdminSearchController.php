@@ -18,6 +18,7 @@ class AdminSearchController extends Controller
                     ->with('image')
                     ->where('title','LIKE','%'.$query."%")
                     ->orWhere('slug','LIKE','%'.$query."%")
+                    ->orWhere('tags','LIKE','%'.$query."%")
                     ->paginate(10);
 
         $results['users'] = User::select('id','name','image_path')
@@ -62,6 +63,7 @@ class AdminSearchController extends Controller
                     ->with('image')
                     ->where('title','LIKE','%'.$query."%")
                     ->orWhere('slug','LIKE','%'.$query."%")
+                    ->orWhere('tags','LIKE','%'.$query."%")
                     ->paginate(10);
 
         return response()->json([

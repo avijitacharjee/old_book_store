@@ -38,6 +38,7 @@ class CreateBooksTable extends Migration
 
             $table->tinyInteger('is_sold')->default(0);
             $table->tinyInteger('status')->default(1);
+            $table->string('tags', 64)->nullable();
             $table->timestamps();
 
             $table->foreign('seller_id')->references('id')->on('users')->onDelete('cascade');

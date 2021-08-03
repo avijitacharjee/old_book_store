@@ -25,6 +25,7 @@ class Book extends Model
         'category_id',
         'sub_category1_id',
         'sub_category2_id',
+        'tags',
         'isbn_no',
         'price',
         'short_description',

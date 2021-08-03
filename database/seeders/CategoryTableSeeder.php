@@ -41,7 +41,7 @@ class CategoryTableSeeder extends Seeder
         foreach ($categories as $category) {
             Category::create(array(
                 'title' => $category['title'],
-                'slug' => Str::slug($category['title'], '-'),
+                // 'slug' => Str::slug($category['title'], '-'),
             ));
         }
     }

@@ -207,6 +207,7 @@ class AdminBookController extends Controller
             'division_id' => $request->division_id,
             'district_id' => $request->district_id,
             'upazila_id' => $request->upazila_id,
+            'tags' => $request->tags,
             'status' => $request->status,
         ]);
         return response()->json([

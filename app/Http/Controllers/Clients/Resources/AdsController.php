@@ -30,7 +30,8 @@ class AdsController extends Controller
                         'division_id',
                         'district_id',
                         'upazila_id',
-                        'is_sold',)
+                        'is_sold',
+                        'tags')
                         ->with('seller')
                         ->with('category')
                         ->with('sub_category')

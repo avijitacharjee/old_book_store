@@ -109,7 +109,7 @@ class LocationTableSeeder extends Seeder
         foreach ($divisions as $division) {
             Location::create(array(
                 'name' => $division['name'],
-                'slug' => Str::slug($division['name'], '-'),
+                // 'slug' => Str::slug($division['name'], '-'),
                 'status' => $division['status'],
             ));
         }
@@ -118,7 +118,7 @@ class LocationTableSeeder extends Seeder
         foreach ($districts as $district) {
             Location::create(array(
                 'name' => $district['name'],
-                'slug' => Str::slug($district['name'], '-'),
+                // 'slug' => Str::slug($district['name'], '-'),
                 'parent_id' => $district['parent_id'],
             ));
         }

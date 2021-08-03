@@ -123,6 +123,7 @@ class PostController extends Controller
             'division_id' => $request->division_id,
             'district_id' => $request->district_id,
             'upazila_id' => $request->upazila_id,
+            'tags' => $request->tags,
             'is_sold' => 0,
             'status' => 1,
         ]);
@@ -134,6 +135,7 @@ class PostController extends Controller
               $name = time().rand(1,100).'.'.$file->extension();
               $file->move(public_path('images/posts'), $name);  
               $file = $name;
+            //   return 100;
               if($file){
                   BookImage::Create([
                       'book_id' => $post->id,
@@ -227,6 +229,7 @@ class PostController extends Controller
             'district_id' => $request->district_id,
             'upazila_id' => $request->upazila_id,
             'is_sold' => $request->is_sold,
+            'tags' => $request->tags,
         ]);
 
         return response()->json([
