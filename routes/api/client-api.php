@@ -9,6 +9,7 @@ use App\Http\Controllers\Clients\Resources\AdsController;
 use App\Http\Controllers\Clients\Resources\LocationController;
 use App\Http\Controllers\Clients\Resources\WishListController;
 use App\Http\Controllers\Clients\Resources\UserController;
+use App\Http\Controllers\Clients\Search\SearchController;
 
 
 Route::post('/registration', [AuthController::class, 'register']);
@@ -68,6 +69,13 @@ Route::group(['prefix' => 'rcs'], function(){
     // User profile with ads
     Route::get('/user/{user_id}', [UserController::class, 'getUser']); // get a user profile
     Route::get('/user/{user_id}/ads', [UserController::class, 'getAds']); // get all Ads of a specific user
+
+    // Search Engine (Demo)
+    Route::group(['prefix' => 'search'], function(){
+        Route::get('/', [SearchController::class, 'search']); // search everything. ex: /search?query=your query
+        Route::get('/books', [SearchController::class, 'bookSearch']); //ex: search/users?query=your query
+        Route::get('/categories', [SearchController::class, 'categorySearch']);
+    });
 
 });
 
