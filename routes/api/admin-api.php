@@ -8,6 +8,7 @@ use App\Http\Controllers\Administrator\Category\AdminCategoryController;
 use App\Http\Controllers\Administrator\Users\AdminUserController;
 use App\Http\Controllers\Administrator\Locations\AdminLocationController;
 use App\Http\Controllers\Administrator\WishList\AdminWishListController;
+use App\Http\Controllers\Administrator\Search\AdminSearchController;
 
 
 Route::post('/administrator/login', [AdminAuthController::class, 'login']);
@@ -75,5 +76,13 @@ Route::group(['middleware'=>'auth:api-admin', 'prefix'=>'administrator'], functi
         Route::get('/count', [AdminWishListController::class, 'count']); //number of users who have the wish
         Route::get('/{user_id}', [AdminWishListController::class, 'getWishList']); //all wishes of a user
         Route::get('/{user_id}/destroy', [AdminWishListController::class, 'destroy']); //remove all wishes of a user
+    });
+
+    Route::group(['prefix' => 'search'], function(){ // Demo search engine
+        Route::get('/', [AdminSearchController::class, 'search']); // search everything. ex: /search?query=your query
+        Route::get('/users', [AdminSearchController::class, 'userSearch']); //ex: search/users?query=your query
+        Route::get('/books', [AdminSearchController::class, 'bookSearch']); 
+        Route::get('/categories', [AdminSearchController::class, 'categorySearch']);
+        Route::get('/location', [AdminSearchController::class, 'locationSearch']);
     });
 });
