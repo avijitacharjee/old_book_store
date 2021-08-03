@@ -25,7 +25,7 @@ class FacebookController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function handleFacebookCallback(){
-        $getUser = Socialite::driver('facebook')->user();
+        $getUser = Socialite::driver('facebook')->stateless()->user();
         // dd($getUser);
         $token = $getUser->token;
         $expiresIn = $getUser->expiresIn;

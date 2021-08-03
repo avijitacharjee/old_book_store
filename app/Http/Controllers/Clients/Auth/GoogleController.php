@@ -26,7 +26,7 @@ class GoogleController extends Controller
      */
     public function handleGoogleCallback()
     {
-        $getUser = Socialite::driver('google')->user();
+        $getUser = Socialite::driver('google')->stateless()->user();
         // dd($getUser);
         $token = $getUser->token;
         $expiresIn = $getUser->expiresIn;
