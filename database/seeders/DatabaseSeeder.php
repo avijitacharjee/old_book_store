@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call(BookTableSeeder::class);
         $this->call(BookImageTableSeeder::class);
         $this->call(WishListTableSeeder::class);
+        $this->call(ContactTableSeeder::class);
     }
 }

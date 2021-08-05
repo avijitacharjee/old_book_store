@@ -9,6 +9,7 @@ use App\Http\Controllers\Administrator\Users\AdminUserController;
 use App\Http\Controllers\Administrator\Locations\AdminLocationController;
 use App\Http\Controllers\Administrator\WishList\AdminWishListController;
 use App\Http\Controllers\Administrator\Search\AdminSearchController;
+use App\Http\Controllers\Administrator\Contacts\AdminContactController;
 
 
 Route::post('/administrator/login', [AdminAuthController::class, 'login']);
@@ -84,5 +85,12 @@ Route::group(['middleware'=>'auth:api-admin', 'prefix'=>'administrator'], functi
         Route::get('/books', [AdminSearchController::class, 'bookSearch']); 
         Route::get('/categories', [AdminSearchController::class, 'categorySearch']);
         Route::get('/location', [AdminSearchController::class, 'locationSearch']);
+    });
+
+    Route::group(['prefix' => 'contacts'], function(){ // Contacts API
+        Route::get('/', [AdminContactController::class, 'index']);
+        Route::get('/search', [AdminContactController::class, 'search']); // ex: /search?query=your query
+        Route::get('/{id}', [AdminContactController::class, 'show']);
+        Route::get('/{id}/delete', [AdminContactController::class, 'delete']);
     });
 });

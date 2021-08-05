@@ -12,6 +12,7 @@ use App\Http\Controllers\Clients\Resources\UserController;
 use App\Http\Controllers\Clients\Search\SearchController;
 use App\Http\Controllers\Clients\Auth\GoogleController;
 use App\Http\Controllers\Clients\Auth\FacebookController;
+use App\Http\Controllers\Clients\Helps\ContactUsController;
 
 
 Route::post('/registration', [AuthController::class, 'register']);
@@ -56,8 +57,8 @@ Route::group(['middleware'=>'auth:api'], function(){
 Route::group(['prefix' => 'rcs'], function(){ 
 
     // category related API for client side
-    Route::get('/categories', [CategoryController::class, 'index']); // get all category
-    Route::get('/featured-category', [CategoryController::class, 'featureCategory']); // get all featured category
+    Route::get('/categories', [CategoryController::class, 'index']); // get all categories
+    Route::get('/featured-category', [CategoryController::class, 'featureCategory']); // get all featured categories
 
     // location related API for client side
     Route::get('/locations', [LocationController::class, 'getAllDiviWithDis']); // get all division with their district
@@ -86,4 +87,6 @@ Route::group(['prefix' => 'rcs'], function(){
     });
 
 });
+
+Route::post('/contact-us', [ContactUsController::class, 'contact']);
 
