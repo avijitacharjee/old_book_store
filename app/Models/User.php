@@ -6,10 +6,11 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -18,8 +19,21 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'gender',
+        'date_of_birth',
         'email',
+        'phone',
+        'google_id',
+        'facebook_id',
         'password',
+        'institute',
+        'division_id',
+        'district_id',
+        'upazila_id',
+        'status',
+        'email_verified_at',
+        'email_verification_token',
+        'image_path',
     ];
 
     /**
@@ -40,4 +54,32 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    /** 
+     * get division name
+     *
+     * @return response()
+     */
+    public function division(){
+        return $this->belongsTo('App\Models\Location', 'division_id')->select(['id','name','slug',]);
+    }
+
+    /** 
+     * get district
+     *
+     * @return response()
+     */
+    public function district(){
+        return $this->belongsTo('App\Models\Location', 'district_id')->select(['id','name','slug',]);
+    }
+
+    /** 
+     * get upazila/city area
+     *
+     * @return response()
+     */
+    public function upazila(){
+        return $this->belongsTo('App\Models\Location', 'upazila_id')->select(['id','name','slug',]);
+    }
 }

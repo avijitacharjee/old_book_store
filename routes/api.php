@@ -3,17 +3,18 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
+
+Route::get('/login-page', function(){
+    return response()->json([
+        'message'=>'please login first or provide a valid access token',
+        'error' => false,   
+    ]);})->name('login');
+
+
+// :::Client side panel:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+require __DIR__.'/api/client-api.php';
+
+ // :::Administrator side panel:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+ require __DIR__.'/api/admin-api.php';
